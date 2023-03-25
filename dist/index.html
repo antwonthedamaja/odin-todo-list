@@ -22,7 +22,30 @@
         </div>
     </nav>
     <main>
+        <div id="items">
+            <div class="item" id="item0">
+                <input type="checkbox">
+                <div class="note">Eat a popsicle</div>
+                <div>
+                    <div class="date">04/01/2023</div>
+                    <button type="button">X</button>
+                </div>
+            </div>
+        </div>
+        <div id="add-item">Add item?</div>
+        <dialog id="modal">
+            <div>
+                <label for="note">Note:</label>
+                <input type="text" name="note" id="note">
 
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date">
+            </div>
+            <div>
+                <button type="button" id="submit">Submit</button>
+                <button type="button" id="close-modal">Close</button>
+            </div>
+        </dialog>
     </main>
     <footer></footer>
 </body>
