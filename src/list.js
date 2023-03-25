@@ -21,11 +21,15 @@ export const list = {
         const newNote = new this.BookObject(note.value, date.value, false);
         this.noteList.push(newNote); 
     },
+    log: function() {
+        console.table(this.noteList);
+    }
 };
 
 export const handleDOM = {
     renderList: function() {
         const items = document.querySelector('#items');
+        items.innerHTML = '';
         list.noteList.forEach((item, index) => {
             items.appendChild(elementFactory('div', undefined, 'item', undefined, `item${index}`, undefined));
             items.lastChild.appendChild(elementFactory('input', 'checkbox', undefined, undefined, undefined, undefined));
@@ -33,6 +37,11 @@ export const handleDOM = {
             items.lastChild.appendChild(elementFactory('div', undefined, undefined, undefined, undefined, undefined));
             items.lastChild.lastChild.appendChild(elementFactory('div', undefined, 'date', undefined, undefined, item.date));
             items.lastChild.lastChild.appendChild(elementFactory('button', 'button', undefined, undefined, undefined, 'X'));
+            items.lastChild.lastChild.lastChild.addEventListener('click', () => {
+                const item = document.querySelector(`#item${index}`);
+                items.removeChild(item);
+                list.noteList.splice(index, 1);
+            });
         });
     },
 };
