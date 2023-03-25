@@ -10,6 +10,7 @@ function elementFactory(element, type, class1, class2, id, text) {
 
 export const list = {
     noteList: [],
+    projectList: [],
     BookObject: function(note, date) {
         this.note = note;
         this.date = date;
@@ -18,8 +19,12 @@ export const list = {
     addItem: function() {
         const note = document.querySelector('#note');
         const date = document.querySelector('#date');
-        const newNote = new this.BookObject(note.value, date.value, false);
+        const newNote = new this.BookObject(note.value, date.value);
         this.noteList.push(newNote); 
+    },
+    addProject: function() {
+        const project = document.querySelector('#project');
+        this.projectList.push(project.value);
     },
     log: function() {
         console.table(this.noteList);
@@ -31,12 +36,12 @@ export const handleDOM = {
         const items = document.querySelector('#items');
         items.innerHTML = '';
         list.noteList.forEach((item, index) => {
-            items.appendChild(elementFactory('div', undefined, 'item', undefined, `item${index}`, undefined));
-            items.lastChild.appendChild(elementFactory('input', 'checkbox', undefined, undefined, undefined, undefined));
-            items.lastChild.appendChild(elementFactory('div', undefined, 'note', undefined, undefined, item.note));
-            items.lastChild.appendChild(elementFactory('div', undefined, undefined, undefined, undefined, undefined));
-            items.lastChild.lastChild.appendChild(elementFactory('div', undefined, 'date', undefined, undefined, item.date));
-            items.lastChild.lastChild.appendChild(elementFactory('button', 'button', undefined, undefined, undefined, 'X'));
+            items.appendChild(elementFactory('div', '', 'item', '', `item${index}`, ''));
+            items.lastChild.appendChild(elementFactory('input', 'checkbox', '', '', '', ''));
+            items.lastChild.appendChild(elementFactory('div', '', 'note', '', '', item.note));
+            items.lastChild.appendChild(elementFactory('div', '', '', '', '', ''));
+            items.lastChild.lastChild.appendChild(elementFactory('div', '', 'date', '', '', item.date));
+            items.lastChild.lastChild.appendChild(elementFactory('button', 'button', '', '', '', 'X'));
             items.lastChild.lastChild.lastChild.addEventListener('click', () => {
                 const item = document.querySelector(`#item${index}`);
                 items.removeChild(item);
@@ -44,4 +49,11 @@ export const handleDOM = {
             });
         });
     },
+    renderProjects: function() {
+        const panel = document.querySelector('#projects-panel');
+        panel.innerHTML = '';
+        list.projectList.forEach((project, index) => {
+            panel.appendChild(elementFactory('div', '', 'selection', '', `project${index}`, project));
+        });
+    }
 };

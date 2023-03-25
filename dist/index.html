@@ -15,21 +15,21 @@
     </header>
     <nav>
         <div class="selection" id="home">Home</div>
-        <div class="selection"id="new-projects">New Project</div>
-        <div id="projects">
-        </div>
+        <div class="selection" id="new-project">New Project</div>
+        <dialog id="project-modal">
+            <div>
+                <label for="project">Project name:</label>
+                <input type="text" name="project" id="project">
+            </div>
+            <div>
+                <button type="button" id="project-submit">Submit</button>
+                <button type="button" id="close-project-modal">Close</button>
+            </div>
+        </dialog>
+        <div id="projects-panel"></div>
     </nav>
     <main>
-        <div id="items">
-            <!-- <div class="item" id="item0">
-                <input type="checkbox">
-                <div class="note">Eat a popsicle</div>
-                <div>
-                    <div class="date">04/01/2023</div>
-                    <button type="button">X</button>
-                </div>
-            </div> -->
-        </div>
+        <div id="items"></div>
         <div id="add-item">Add item?</div>
         <dialog id="modal">
             <div>

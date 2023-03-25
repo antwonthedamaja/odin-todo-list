@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template: 1fr 10fr 1fr/ 1fr 6fr;
+    grid-template: 1fr 10fr 1fr/ 1fr 5fr;
     height: 100vh;
     width: auto;
     font-family: 'Ubuntu';
@@ -42,18 +42,22 @@ nav {
     color: white;
     padding: 2rem;
     font-size: 1.75rem;
+    overflow-y: auto;
 }
 
 .selection {
     cursor: pointer;
 }
 
-#projects {
+#projects-panel {
     border-top: 1px solid grey;
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     padding-top: 2rem;
     gap: 2rem;
+    word-break: break-all;
 }
 
 footer {
