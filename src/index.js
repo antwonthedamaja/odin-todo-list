@@ -53,7 +53,7 @@ const deleteProject = document.querySelector('#delete-project');
 deleteProject.addEventListener('click', () => {
     if (!list.projectSelect) {
         alert('Please select a project first');
-    } else {
+    } else if (confirm('Are you sure you want to delete this project?') === true) {
         list.removeProjectAndNotes();
         const page = document.querySelector('#page');
         page.textContent = 'Home';
