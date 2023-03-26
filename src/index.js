@@ -47,3 +47,18 @@ home.addEventListener('click', () => {
     const page = document.querySelector('#page');
     page.textContent = 'Home';
 });
+
+const deleteProject = document.querySelector('#delete-project');
+
+deleteProject.addEventListener('click', () => {
+    if (!list.projectSelect) {
+        alert('Please select a project first');
+    } else {
+        list.removeProjectAndNotes();
+        const page = document.querySelector('#page');
+        page.textContent = 'Home';
+        list.projectSelect = '';
+        handleDOM.renderProjects();
+        handleDOM.renderList();
+    }
+});

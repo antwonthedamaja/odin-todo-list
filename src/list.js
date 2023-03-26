@@ -39,6 +39,19 @@ export const list = {
     addProject: function() {
         const project = document.querySelector('#project');
         this.projectList.push(project.value);
+    },
+    removeProjectAndNotes: function() {
+        const projects = document.querySelectorAll('.project');
+        projects.forEach((project, index) => {
+            if (project.textContent === list.projectSelect) {
+                this.projectList.splice(index, 1);
+                this.noteList.forEach((item, i) => {
+                    if (item.project === list.projectSelect) {
+                        this.noteList.splice(i, 1);
+                    }
+                })
+            }
+        });
     }
 };
 
@@ -82,7 +95,7 @@ export const handleDOM = {
         const panel = document.querySelector('#projects-panel');
         panel.innerHTML = '';
         list.projectList.forEach((project, index) => {
-            panel.appendChild(elementFactory('div', '', 'selection', '', `project${index}`, project));
+            panel.appendChild(elementFactory('div', '', 'selection', 'project', `project${index}`, project));
             panel.lastChild.addEventListener('click', () => {
                 const currentProject = document.querySelector(`#project${index}`);
                 list.projectSelect = currentProject.textContent;
