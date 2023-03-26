@@ -1,6 +1,5 @@
 import './style.css';
-import {list} from './list.js';
-import {handleDOM} from './list.js';
+import {list, handleDOM} from './list.js';
 
 // DOM manipulation
 
@@ -42,7 +41,7 @@ projectSubmit.addEventListener('click', () => {
 const home = document.querySelector('#home');
 
 home.addEventListener('click', () => {
-    list.projectSelect = false;
+    list.projectSelect = '';
     handleDOM.renderList();
     const page = document.querySelector('#page');
     page.textContent = 'Home';

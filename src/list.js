@@ -24,7 +24,7 @@ function ProjectBookObject(note, date, project) {
 export const list = {
     noteList: [],
     projectList: [],
-    projectSelect: false,
+    projectSelect: '',
     addItem: function() {
         const note = document.querySelector('#note');
         const date = document.querySelector('#date');
@@ -52,6 +52,11 @@ export const list = {
                 })
             }
         });
+    },
+    sortList: function() {
+        this.noteList.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+        });
     }
 };
 
@@ -59,6 +64,7 @@ export const handleDOM = {
     renderList: function() {
         const items = document.querySelector('#items');
         items.innerHTML = '';
+        list.sortList();
         if (list.projectSelect) {
             list.noteList.forEach((item, index) => {
                 if (item.project === list.projectSelect) {
