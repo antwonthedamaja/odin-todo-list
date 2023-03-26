@@ -38,3 +38,12 @@ projectSubmit.addEventListener('click', () => {
     handleDOM.renderProjects();
     projectModal.close();
 });
+
+const home = document.querySelector('#home');
+
+home.addEventListener('click', () => {
+    list.projectSelect = false;
+    handleDOM.renderList();
+    const page = document.querySelector('#page');
+    page.textContent = 'Home';
+});

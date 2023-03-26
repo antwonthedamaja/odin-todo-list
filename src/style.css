@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template: 1fr 10fr 1fr/ 1fr 5fr;
+    grid-template: 1fr 10fr 1fr / 1fr 5fr;
     height: 100vh;
     width: auto;
     font-family: 'Ubuntu';
@@ -21,14 +21,25 @@ header {
     background-color: rgb(37, 42, 58);
     padding: 1rem;
     color: white;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
 }
 
 #logo-container {
+    grid-column: 1 / 2;
     display: flex;
     align-items: center;
     height: 100%;
     font-size: 3rem;
     font-weight: 700;
+}
+
+#hero {
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
 }
 
 nav {
@@ -49,12 +60,17 @@ nav {
     cursor: pointer;
 }
 
+.selection:hover {
+    background-color: rgb(80, 74, 74);
+}
+
 #projects-panel {
     border-top: 1px solid grey;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding-top: 2rem;
     gap: 2rem;
     word-break: break-all;
