@@ -1,7 +1,7 @@
 import './style.css';
 import {list, handleDOM} from './list.js';
 
-// DOM manipulation
+// Modals
 
 const modal = document.querySelector('#modal');
 const openModal = document.querySelector("#add-item");
@@ -9,14 +9,6 @@ const closeModal = document.querySelector("#close-modal");
 
 openModal.addEventListener('click', () => modal.showModal());
 closeModal.addEventListener('click', () => modal.close());
-
-const submit = document.querySelector('#submit');
-
-submit.addEventListener('click', () => {
-    list.addItem();
-    handleDOM.renderList();
-    modal.close()
-});
 
 const newProject = document.querySelector("#new-project");
 const projectModal = document.querySelector("#project-modal");
@@ -28,6 +20,16 @@ newProject.addEventListener('click', () => {
 
 closeProjectModal.addEventListener('click', () => {
     projectModal.close();
+});
+
+// DOM manipulation
+
+const submit = document.querySelector('#submit');
+
+submit.addEventListener('click', () => {
+    list.addItem();
+    handleDOM.renderList();
+    modal.close()
 });
 
 const projectSubmit = document.querySelector('#project-submit');
@@ -61,3 +63,8 @@ deleteProject.addEventListener('click', () => {
         handleDOM.renderList();
     }
 });
+
+// for local storage
+
+handleDOM.renderProjects();
+handleDOM.renderList();

@@ -16,8 +16,8 @@ function BookObject(note, date, project) {
 }
 
 export const list = {
-    noteList: [],
-    projectList: [],
+    noteList: JSON.parse(localStorage.getItem('notes')) || [],
+    projectList: JSON.parse(localStorage.getItem('projects')) || [],
     projectSelect: '',
     addItem: function() {
         const note = document.querySelector('#note');
@@ -29,10 +29,12 @@ export const list = {
             const newNote = new BookObject(note.value, date.value, false);
             this.noteList.push(newNote);
         }
+        storage.setStorage();
     },
     addProject: function() {
         const project = document.querySelector('#project');
         this.projectList.push(project.value);
+        storage.setStorage();
     },
     removeProjectAndNotes: function() {
         const projects = document.querySelectorAll('.project');
@@ -46,6 +48,7 @@ export const list = {
                 })
             }
         });
+        storage.setStorage();
     },
     sortList: function() {
         this.noteList.sort((a, b) => {
@@ -63,7 +66,15 @@ export const handleDOM = {
             list.noteList.forEach((item, index) => {
                 if (item.project === list.projectSelect) {
                     items.appendChild(elementFactory('div', '', 'item', '', `item${index}`, ''));
-                    items.lastChild.appendChild(elementFactory('input', 'checkbox', '', '', '', ''));
+                    const checkbox = elementFactory('input', 'checkbox', '', '', '', '');
+                    if (item.check === true) {
+                        checkbox.checked = true;
+                    }
+                    items.lastChild.appendChild(checkbox);
+                    items.lastChild.lastChild.addEventListener('click', () => {
+                        list.noteList[index].check = !list.noteList[index].check;
+                        storage.setStorage();
+                    });
                     items.lastChild.appendChild(elementFactory('div', '', 'note', '', '', item.note));
                     items.lastChild.appendChild(elementFactory('div', '', '', '', '', ''));
                     items.lastChild.lastChild.appendChild(elementFactory('div', '', 'date', '', '', item.date));
@@ -72,13 +83,22 @@ export const handleDOM = {
                         const item = document.querySelector(`#item${index}`);
                         items.removeChild(item);
                         list.noteList.splice(index, 1);
+                        storage.setStorage();
                     });
                 }
             });
         } else {
             list.noteList.forEach((item, index) => {
                 items.appendChild(elementFactory('div', '', 'item', '', `item${index}`, ''));
-                items.lastChild.appendChild(elementFactory('input', 'checkbox', '', '', '', ''));
+                const checkbox = elementFactory('input', 'checkbox', '', '', '', '');
+                if (item.check === true) {
+                    checkbox.checked = true;
+                }
+                items.lastChild.appendChild(checkbox);
+                items.lastChild.lastChild.addEventListener('click', () => {
+                    list.noteList[index].check = !list.noteList[index].check;
+                    storage.setStorage();
+                });
                 items.lastChild.appendChild(elementFactory('div', '', 'note', '', '', item.note));
                 items.lastChild.appendChild(elementFactory('div', '', '', '', '', ''));
                 items.lastChild.lastChild.appendChild(elementFactory('div', '', 'date', '', '', item.date));
@@ -87,6 +107,7 @@ export const handleDOM = {
                     const item = document.querySelector(`#item${index}`);
                     items.removeChild(item);
                     list.noteList.splice(index, 1);
+                    storage.setStorage();
                 });
             });
         }
@@ -104,5 +125,13 @@ export const handleDOM = {
                 page.textContent = currentProject.textContent;
             });
         });
+    }
+};
+
+const storage = {
+    setStorage: function() {
+        localStorage.clear();
+        localStorage.setItem('notes', JSON.stringify(list.noteList));
+        localStorage.setItem('projects', JSON.stringify(list.projectList));
     }
 };
