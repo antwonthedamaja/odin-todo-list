@@ -8,16 +8,10 @@ function elementFactory(element, type, class1, class2, id, text) {
     return newElement;
 }
 
-function BookObject(note, date) {
+function BookObject(note, date, project) {
     this.note = note;
     this.date = date;
-    this.check = false;
-}
-
-function ProjectBookObject(note, date, project) {
-    this.note = note;
-    this.date = date;
-    this.project = project;
+    this.project = project
     this.check = false;
 }
 
@@ -29,10 +23,10 @@ export const list = {
         const note = document.querySelector('#note');
         const date = document.querySelector('#date');
         if (list.projectSelect) {
-            const newNote = new ProjectBookObject(note.value, date.value, list.projectSelect);
+            const newNote = new BookObject(note.value, date.value, list.projectSelect);
             this.noteList.push(newNote);
         } else {
-            const newNote = new BookObject(note.value, date.value);
+            const newNote = new BookObject(note.value, date.value, false);
             this.noteList.push(newNote);
         }
     },
